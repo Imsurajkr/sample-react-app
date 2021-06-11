@@ -24,7 +24,7 @@ set :deploy_to, "/home/deploy/#{fetch :application}"
 # append :linked_files, "config/database.yml"
 
 # Default value for linked_dirs is []
-append :linked_files, ".env"
+# append :linked_files, ".env"
 append :linked_dirs, "node_modules"
 
 set :nvm_type, :user
@@ -41,9 +41,9 @@ namespace :deploy do
             end
         end
     end
-
     before "symlink:release", :yarn_deploy
 end
+
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
 # Default value for default_env is {}
