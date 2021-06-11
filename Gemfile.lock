@@ -158,5 +158,3 @@ DEPENDENCIES
   capistrano-rbenv (~> 2.1, >= 2.1.4)
   rails
 
-BUNDLED WITH
-   2.2.15
