@@ -24,6 +24,26 @@ set :deploy_to, "/home/deploy/#{fetch :application}"
 # append :linked_files, "config/database.yml"
 
 # Default value for linked_dirs is []
+append :linked_files, ".env"
+append :linked_dirs, "node_modules"
+
+set :nvm_type, :user
+set :nvm_node, 'v8.11.1'
+set :nvm_map_bins, %{node npm yarn}
+
+set :yarn_flags, %w(--silent --no-progress)
+
+namespace :deploy do 
+    task :yarn_deploy do 
+        on roles fetch(:yarn_roles) do 
+            within fetch(:yarn_target_path, release_path) do
+                execute fetch(:yarn_bin), 'build'
+            end
+        end
+    end
+
+    before "symlink:release", :yarn_deploy
+end
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
 # Default value for default_env is {}
